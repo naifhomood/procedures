@@ -1,1 +1,1121 @@
-/tmp/sdrVLTVc5v3hQDhQzaL6AszY.html
+<!DOCTYPE html><html lang="ar"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart تفاعلي</title>
+    <style>
+        body {
+            font-family: "Tajawal", "IBM Plex Sans Arabic", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            direction: rtl;
+            background-color: #f4f7fa;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #C6984C; /* اللون الأخضر */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 20px solid #f4f7fa; /* اللون الذهبي */
+        }
+
+        .flowchart-container {
+            width: 95%;
+            max-width: 750px;
+            background-color: #ffffff;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 80px;
+            box-shadow: 0 20px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .step {
+            background-color: #C6984C;
+            color: #ffffff;
+            padding: 25px;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            position: relative;
+            width: 92%;
+            display: inline-block;
+        }
+
+        .step-options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: -1px;
+            position: relative;
+        }
+
+        .step-button {
+            background-color: #B3B3B3;
+            color: black;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .step-button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .step-button.active {
+            background-color: #0c6043;
+            color: #ffffff;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .popup {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #ccc;
+            padding: 40px;
+            border-radius: 5px;
+            z-index: 40;
+            width: 200px;
+            top: 50px;
+            right: 0;
+        }
+
+        .step-button:hover .popup {
+            display: block;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        line {
+            stroke: #C6984C;
+            stroke-width: 2;
+        }
+    </style>
+<script defer="" data-domain="lime-karylin-58.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+
+<div class="header">
+    <img src="https://rajhifoundation.minasatech.com/wp-content/uploads/sites/2858/2024/11/Asset-6.svg" alt="عبد الله الراجحي الخيرية" style="max-width: 250px; vertical-align: middle; margin-left: 150px;">
+    <span>اجراءات المنح لمؤسسة عبدالله بن عبدالعزيز الراجحي الخيرية </span>
+</div>
+
+<!-- زر التنشيط -->
+<button class="refresh-button" onclick="location.reload();">تنشيط الصفحة</button>
+
+<div class="flowchart-container" id="flowchartContainer">
+    <svg id="connections"></svg>
+</div>
+
+<div class="flowchart-container" id="flowchartContainer">
+    <svg id="connections"></svg>
+</div>
+
+
+
+<script>
+
+    const stepsData = {
+             step1: {
+
+            title: "دراسة المشروع",
+
+             title2: "مشرف الدراسات",
+
+          
+
+            options: [
+
+                { text: "دراسـة المشروع", nextStep: "step2", tooltip: "يتم دراسة الطلب وفق معايير محددة وابداء راي مشرف الدراسات ", image: "https://khamsat.hsoubcdn.com/images/services/3214675/e87694b001f6da278d780a95ced9a107.jpg" },
+
+                { text: "استكمال بيانات", nextStep: "step30" , tooltip: "يتم طلب استكمال بيانات المشروع من الجهة المقدمة للمشروع " }
+
+                ,
+
+                { text: "الاعتذار عن المشروع", nextStep: "step2" , tooltip: "يتم الاعتذار عن المشروع مع اشعار الجهة " }
+
+            ]
+
+        },
+
+
+
+        
+
+        
+
+                             
+
+    step30: {
+
+            title: "طلب استكمال بيانات ",
+
+            title2: "صلاحية الجهة ",
+
+            options: [
+
+                { text: "تحديث البيانات  ", nextStep: "step1", tooltip: "يتم تحديث البيانات من قبل الجهة وارفاق المرفقات المطلوبة  ", image: "https://example.com/support_image.jpg" },
+
+             
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+        
+
+    step2: {
+
+            title: "دراسة المشروع",
+
+            title2: "مدير الدراسات",
+
+            options: [
+
+                { text: "دعم المشروع ", nextStep: "step3", tooltip: "يتم استعراض دراسة المشروع ودرجة معاييره وراي مشرف الدراسات ثم اتخاذ اجراء لدعم ", image: "https://example.com/support_image.jpg" },
+
+                { text: "ارجاع للدراسة ", nextStep: "step1", tooltip: "عند وجود ملاحظة يتم ارجاع المشروع للدراسة مرة أخرى " }
+
+                ,
+
+                { text: "رفض نهائي ", nextStep: "closed", tooltip: "يتم الاعتذار عن المشروع مع اشعار الجهة  " }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+                
+
+    step3: {
+
+            title: "لجنة المنح ",
+
+            title2: "لجنة المنح",
+
+            options: [
+
+                { text: "دعـم المشروع ", nextStep: "step4", tooltip: "يتم استعراض دراسة المشروع ودرجة معاييره وراي مشرف الدراسات ثم اتخاذ اجراء لدعم", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة لمدير الدراسات  ", nextStep: "step2", tooltip: "عند وجود ملاحظة يتم ارجاع المشروع للدراسة مرة أخرى" }
+
+                ,
+
+                { text: "رفض نهائي ", nextStep: "closed", tooltip: "يتم الاعتذار عن المشروع مع اشعار الجهة  " }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+                       
+
+    step4: {
+
+            title: "مجلس الامناء ",
+
+            title2: "مجلس الامناء",
+
+            options: [
+
+                { text: "دعــم المشروع ", nextStep: "step5", tooltip: "يتم استعراض دراسة المشروع ودرجة معاييره وراي لجنة المنح ثم اتخاذ اجراء لدعم", image: "https://example.com/support_image.jpg" },
+
+                
+
+                { text: "رفض نهائي ", nextStep: "closed", tooltip: "يتم الاعتذار عن المشروع مع اشعار الجهة  " }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+           
+
+                   
+
+    step5: {
+
+            title: "مرحلة الاتفاقيات ",
+
+            title2: " مشرف المشروع ",
+
+            options: [
+
+                { text: "ارسال الاتفاقية للمراجعة وخطة المشروع ", nextStep: "step6", tooltip: "يتم اعداد الاتفاقية وخطة المشروع وتوزيع الدفعات  ثم ارسال الاتفاقية للمراجعة ", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة دراسة المبلغ المعتمد", nextStep: "step1", tooltip: "إعادة المشروع لمرحلة دراسة المشروع لدراسة وتعديل مبلغ الدعم" }
+
+                ,
+
+        
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step6: {
+
+            title: "مراجعة الاتفاقية والخطة  ",
+
+            title2: "صلاحية مدير المشاريع ",
+
+            options: [
+
+                { text: "عتماد الاتفاقية الكترونياً", nextStep: "step9", tooltip: "يتم مراجعة الاتفاقية  ثم اخذ الاجراء ", image: "https://example.com/support_image.jpg" },
+
+                { text: " اعتماد الاتفاقية ورقياً ", nextStep: "step7", tooltip: "يتم مراجعة الاتفاقية  ثم اخذ الاجراء " }
+
+                ,
+
+                { text: "للمراجعة والتعديل", nextStep: "", tooltip: "يتم إعادة المشروع   لمرحلة الاتفاقيات لتعديل  المطلوب" }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step7: {
+
+            title: "اعتماد الجهة للاتفاقية",
+
+            title2: "صلاحية الجهة ",
+
+            options: [
+
+                { text: "قبول الاتفاقية ", nextStep: "step8", tooltip: "يتم قبول الاتفاقية من الجهة ", image: "https://example.com/support_image.jpg" },
+
+                { text: "طلب التعديل على الإتفاقية", nextStep: "step5", tooltip: "طلب التعديل على الاتفاقية يتم إعادة المشروع لمرحلة الاتفاقيات لتعديل  المطلوب" }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                    
+
+    step8: {
+
+            title: "اعتماد  الرئيس التفيذي للاتفاقية",
+
+            title2: "صلاحية الرئيس التنفيذي",
+
+            options: [
+
+                { text: "قبـول الاتفاقية ", nextStep: "step10", tooltip: "يتم اعتماد الاتفاقية من الرئيس التنفيذي  ", image: "https://example.com/support_image.jpg" },
+
+                { text: ":  طلب التعديل على الإتفاقية", nextStep: "step5", tooltip: "طلب التعديل على الاتفاقية يتم إعادة المشروع لمرحلة الاتفاقيات لتعديل  المطلوب" }
+
+            
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                      
+
+    step9: {
+
+            title: "مرحلة الضبط المالي والمراجعة ",
+
+            title2: "المدير المالي",
+
+            options: [
+
+                { text: "ارسال الاتفاقية  ", nextStep: "step7", tooltip: " بعد مراجعة المدير المالي للاتفاقية يتم اتخاذ الاجراء وارسال الاتفاقية للجهة مرحلة اعتماد الجهة  للاتفاقية  ", image: "https://example.com/support_image.jpg" },
+
+                { text: "طلب التعديل على الإتفاقية", nextStep: "step5", tooltip: "طلب التعديل على الاتفاقية يتم إعادة المشروع لمرحلة الاتفاقيات لتعديل  المطلوب" }
+
+            ]
+
+        },
+
+          
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                      
+
+    step10: {
+
+            title: "مرحلة اصدار اذن صرف ",
+
+            title2: "صلاحية مشرف المشاريع ",
+
+            options: [
+
+                { text: "طلب اصدار إذن صرف", nextStep: "step26", tooltip: "بعد اعتماد الاتفاقية وطبقا لجدول الدفعات يتم طلب اصدار إذن الصرف لدفعة المستحقة ", image: "https://example.com/support_image.jpg" },
+
+                { text: "اضافة ملحق للعقد وتعديل مبلغ المشروع", nextStep: "step11", tooltip: "قد يتطلب المشروع التعديل على الاتفاقية او الدفعات  " }
+
+                ,
+
+                { text: "تحويل لمتعثر", nextStep: "step27", tooltip: "في حالة تعثر تنفيذ المشروع  يقوم مشرف المشاريع بإجراء تحويل المشروع لمتعثر" }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+            step26: {
+
+            title: "اعتماد اذن الصرف  ",
+
+            title2: "صلاحية مدير المشاريع",
+
+            options: [
+
+                { text: "اعتماد اذن الصرف  ", nextStep: "step12", tooltip: "مراجعة اذن الصرف ومتطلب الدفعة من قبل المدير  ", image: "https://example.com/support_image.jpg" },
+
+                { text: "اعادة الى المشرف ", nextStep: "step10", tooltip: "في حال وجود ملاحظة على اذن الصرف يتم ارجاع المعاملة لمرحلة طلب اذن الصرف لتعديل اذن الصرف من قبل مشرف المشاريع" }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+             
+
+            step27: {
+
+            title: "اعتماد تحويل المشروع لمتعثر   ",
+
+            title2: "صلاحية مدير المشاريع",
+
+            options: [
+
+                { text: "التحويل لمتعثر  ", nextStep: "closed", tooltip: "مراجعة اذن الصرف ومتطلب الدفعة من قبل المدير  ", image: "https://example.com/support_image.jpg" },
+
+                { text: "اعادة الى المشرف ", nextStep: "step10", tooltip: "في حال تم التفاهم وارجاع المشروع للتشغيل " }
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step11: {
+
+            title: "ملحق الاتفاقيات ",
+
+            title2: "صلاحية مدير المشاريع",
+
+            options: [
+
+                { text: "اعتماد ملحق الاتفاقية ", nextStep: "step10", tooltip: "            بعد اخذ اجراء إضافة ملحق للعقد و تعديل مبلغ المشروع ينتقل المشروع للمدير المشاريع للاعتمادفي حالة تم تغير المبلغ المعتمد يتطلب  أيضا تعديل في جدول الدفعات من مشرف المشاريع ينتقل المشروع لمرحلة طلب اذن الصرف لتعديل جدول الدفعات حسب المبلغ المعتمد الجديد وطلب اجراء  اذن الصرف ء  ", image: "https://example.com/support_image.jpg" },
+
+                { text: "تعديل ملحق الاتفاقية", nextStep: "step10", tooltip: "في حال وجود ملاحظة على ملحق العقد يتم ارجاع العقد لمرحلة طلب اذن الصرف لتعديل ملحق العقد من قبل مشرف المشاريع" }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step12: {
+
+            title: "مراجعة المحاسب",
+
+            title2: "صلاحية المحاسب",
+
+            options: [
+
+                { text: "مراجعة المحاسب ", nextStep: "step14", tooltip: "يقوم المحاسب بمراجعة استحقاق الدفعة المطلوب اذن صرف لها و العقد واخذ الاجراء  ", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة مع ملاحظة", nextStep: "step13", tooltip: "في حالة وجود ملاحظة من المحاسب يتم إعادة المشروع لمرحلة معاد مالية " }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step13: {
+
+            title: "معاد مالية",
+
+            title2: "صلاحية مدير المشاريع",
+
+            options: [
+
+                { text: "إعادة لقسم مراجعة المحاسب  ", nextStep: "step12", tooltip: "يقوم مدير المشاريع بمراجعة ملاحظة المحاسب ", image: "https://example.com/support_image.jpg" },
+
+                { text: "ارجاع للمشرف  ", nextStep: "step10", tooltip: "يقوم مدير المشاريع بمراجعة ملاحظة المحاسب  وإعادة المشروع لمر حلة طلب اذن الصرف ليقوم مشرف المشاريع بالتعديل المطلوب  " }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                      
+
+    step14: {
+
+            title: "اعتماد المدير المالي ",
+
+            title2: "صلاحية المدير المالي",
+
+            options: [
+
+                { text: "اعتماد الصرف", nextStep: "step15", tooltip: "يقوم المدير المالي بمراجعة استحقاق الدفعة المطلوب اذن صرف لها و العقد واخذ الاجراء", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة مع ملاحظة", nextStep: "step13", tooltip: "في حالة وجود ملاحظة من المحاسب يتم إعادة المشروع لمرحلة معاد مالية " }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step15: {
+
+            title: "اصدار سند الصرف وصرف الدفعة ",
+
+            title2: "صلاحية المحاسب",
+
+            options: [
+
+                { text: "صرف الدفعة", nextStep: "step16", tooltip: "بعد اعتماد المدير المالي للصرف الدفعة يقوم المحاسب بصرف الدفعة وتحويلها لحساب الجهة واثبات قيد اليومية ", image: "https://example.com/support_image.jpg" },
+
+                { text: "ارجاع المعاملة", nextStep: "step13", tooltip: "عند وجود ملاحظة اثناء الصرف  يقوم المحاسب بإرجاع المعاملة لمرحلة معاد مالية  مع ذكر  السبب" }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step16: {
+
+            title: "رفع سند القبض",
+
+            title2: "صلاحية الجهة ",
+
+            options: [
+
+                { text: "رفع سند القبض", nextStep: "step17", tooltip: "تقوم الجهة بارفاق سند القبض", image: "https://example.com/support_image.jpg" },
+
+               
+
+            ]
+
+        },
+
+     
+
+     
+
+     
+
+                
+
+step17: {
+
+            title: "قبول سند القبض   ",
+
+            title2: "صلاحية المحاسب ",
+
+            options: [
+
+                { text: "قبول سند القبض  ", nextStep: "step18", tooltip: "يقوم المحاسب في مراجعة سند القبض واتخاذ الاجراء ", image: "https://example.com/support_image.jpg" },
+
+                  { text: "رفض سند القبض  ", nextStep: "step16", tooltip: "يقوم المحاسب في مراجعة سند القبض واتخاذ الاجراء", image: "https://example.com/support_image.jpg" },
+
+              
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+                        
+
+step18: {
+
+            title: "تفاصيل المسار والمتطلبات ",
+
+            title2: "قم باختيار الزر الذي يمثل حالة المشروع الفعلية ليتبع المسار الصحيح  ",
+
+            options: [
+
+                { text: "يوجد متطلب للدفعة   ", nextStep: "step19", tooltip: " ", image: "https://example.com/support_image.jpg" },
+
+                  { text: "يوجد دفعة اخرى   ", nextStep: "step10", tooltip: "", image: "https://example.com/support_image.jpg" },
+
+                    { text: "لا يوجد دفعة اخرى   ", nextStep: "step24", tooltip: "", image: "https://example.com/support_image.jpg" },
+
+              
+
+            ]
+
+        },
+
+        
+
+        
+
+        
+
+                      
+
+    step19: {
+
+            title: "مرحلة طلب تقرير",
+
+            title2: "صلاحية مشرف المشاريع",
+
+            options: [
+
+                { text: "طلب تقرير", nextStep: "step20", tooltip: "يقوم مشرف المشاريع  بطلب تقرير للمشروع اعتماد على متطلب الدفعة ", image: "https://example.com/support_image.jpg" },
+
+              
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step20: {
+
+            title: "رفع التقرير  ",
+
+            title2: "صلاحية الجهة ",
+
+            options: [
+
+                { text: "رفع تقرير ", nextStep: "step21", tooltip: "تقوم الجهة بارفاق التقرير المطلوب", image: "https://example.com/support_image.jpg" },
+
+              
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                    
+
+    step21: {
+
+            title: "اعتماد  التقرير",
+
+            title2: "صلاحية مشرف المشاريع",
+
+            options: [
+
+                { text: "اعتماد التقرير", nextStep: "step22", tooltip: "يقوم مشرف المشاريع  بمراجعة التقرير و اعتماده", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة طلب التقرير", nextStep: "step20", tooltip: "يقوم مشرف المشاريع  بمراجعة التقرير و إعادة المشروع لمرحلة رفع تقرير  في حالة وجود ملاحظة على التقرير " }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step22: {
+
+            title: "مراجعة مشرف الجودة",
+
+            title2: "صلاحية مشرف الجودة",
+
+            options: [
+
+                { text: "مراجعة مشرف الجودة", nextStep: "step23", tooltip: "يقوم مشرف الجودة بمراجعة المشروع ومتابعة التقارير وسير عمل المشروع طبقا للخطة ثم اخذ اجراء", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة وطلب ايضاح", nextStep: "step19", tooltip: "يقوم مشرف الجودة بمراجعة المشروع ومتابعة التقارير وسير عمل المشروع طبقا للخطة ثم اخذ اجراء  في هذا الاجراء يعاد المشروع  لمرحلة طلب  تقرير " }
+
+            ]
+
+        },
+
+           
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                    
+
+    step23: {
+
+            title: "اعتماد   مدير الجودة",
+
+            title2: "صلاحية مدير الجودة",
+
+            options: [
+
+                { text: "اعتماد ومصداقة الجودة", nextStep: "step12", tooltip: "يقوم مدير الجودة بمراجعة المشروع ومتابعة التقارير وسير عمل المشروع طبقا للخطة ثم  اخذ الاجراء ", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة وطلب ايضاح", nextStep: "step19", tooltip: "يقوم مشرف الجودة بمراجعة المشروع ومتابعة التقارير وسير عمل المشروع طبقا للخطة ثم اخذ اجراء  في هذا الاجراء يعاد المشروع  لمرحلة طلب اذن الصرف" }
+
+            ]
+
+        },
+
+           
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                    
+
+    step24: {
+
+            title: "تقييم المشروع والشريك ",
+
+            title2: "صلاحية مشرف المشاريع",
+
+            options: [
+
+                { text: "تقييم المشروع", nextStep: "step25", tooltip: "يقوم مشرف المشروع بمراجعة المشروع والتنفيذ وتقييم المشروع والشريك وفق معايير معدة  مسبقا ", image: "https://example.com/support_image.jpg" },
+
+             
+
+            ]
+
+        },
+
+            
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                      
+
+    step25: {
+
+            title: "اعتماد التقييم ",
+
+            title2: "صلاحية مدير المشاريع",
+
+            options: [
+
+                { text: "اعتماد التقييم  ", nextStep: "step29", tooltip: "يقوم مدير المشاريع بالاطلاع على تقييم مشرف المشاريع للمشروع و الشريك ثم يقوم بأخذ الاجراء ", image: "https://example.com/support_image.jpg" },
+
+                { text: "إعادة  التقييم  ", nextStep: "step24", tooltip: ":  يقوم مدير المشاريع بالاطلاع على تقييم مشرف المشاريع للمشروع و الشريك ثم يقوم بأخذ الاجراء " }
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+                     
+
+    step29: {
+
+            title: "تقييم الجودة للمشروع والشريك    ",
+
+            title2: "صلاحية مدير الجودة",
+
+            options: [
+
+                { text: "تقييم المشروع والاكتمال ", nextStep: "completed", tooltip: "يقوم مدير الجودة  بمراجعة المشروع والتنفيذ وتقييم المشروع والشريك وفق معايير معدة مسبقا يعتمد تقييم المشروع على التقييم النهائي لمدير الجودة مرحلة تقييم الجودة للمشروع والشريك   ويتم اغلاق ", image: "https://example.com/support_image.jpg" },
+
+               
+
+            ]
+
+        },
+
+        
+
+                
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        closed: {
+
+            title: "إغلاق المشروع",
+
+            description: "تم إغلاق المشروع بناءً على القرار المتخذ في إحدى الخطوات السابقة.",
+
+            options: []
+
+        },
+
+        completed: {
+
+            title: "المشروع مكتمل",
+
+            description: "تم تنفيذ المشروع بنجاح وتسليمه بالكامل.",
+
+            options: []
+
+        }
+
+    };
+
+    let currentStepId = "step1";
+    const flowchartContainer = document.getElementById("flowchartContainer");
+    const svg = document.getElementById("connections");
+
+    function createStep(stepId, fromElement = null) {
+        const stepData = stepsData[stepId];
+        if (!stepData) return;
+
+        const stepElement = document.createElement("div");
+        stepElement.classList.add("step");
+        
+
+        const title = document.createElement("h3");
+        title.textContent = stepData.title;
+        stepElement.appendChild(title);
+           const title2 = document.createElement("h4");
+        title2.textContent = stepData.title2;
+        stepElement.appendChild(title2);
+
+        if (stepData.description) {
+            const description = document.createElement("p");
+            description.textContent = stepData.description;
+            stepElement.appendChild(description);
+        }
+
+        const optionsContainer = document.createElement("div");
+        optionsContainer.classList.add("step-options");
+        stepData.options.forEach(option => {
+            const button = document.createElement("button");
+            button.classList.add("step-button");
+            button.textContent = option.text;
+
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+            popup.textContent = option.tooltip;
+            button.appendChild(popup);
+
+            // Check if the button should be disabled
+            if (option.isDisabled) {
+                button.classList.add("disabled");
+                button.style.cursor = "default"; // تغيير المؤشر ليدل على عدم القابلية للضغط
+            } else {
+                button.onclick = () => {
+                    Array.from(stepElement.querySelectorAll("button")).forEach(btn => {
+                        btn.classList.add("disabled");
+                        btn.classList.remove("active");
+                    });
+                    button.classList.add("active");
+                    currentStepId = option.nextStep; 
+                    createStep(option.nextStep, stepElement);
+                };
+            }
+            optionsContainer.appendChild(button);
+        });
+        stepElement.appendChild(optionsContainer);
+
+        flowchartContainer.appendChild(stepElement);
+
+        if (fromElement) {
+            const fromX = fromElement.offsetLeft + fromElement.offsetWidth / 2;
+            const fromY = fromElement.offsetTop + fromElement.offsetHeight;
+            const toX = stepElement.offsetLeft + stepElement.offsetWidth / 2;
+            const toY = stepElement.offsetTop;
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", fromX);
+            line.setAttribute("y1", fromY);
+            line.setAttribute("x2", toX);
+            line.setAttribute("y2", toY);
+            svg.appendChild(line);
+        }
+    }
+
+    createStep(currentStepId);
+</script>
+
+
+</body></html>
